@@ -1,53 +1,58 @@
 # Playwright Negative Test Automation
 
-This repository runs 50 negative Playwright test cases from the provided Excel workbook and writes the live execution results back to the workbook.
+This project runs 50 negative Singlish-to-Sinhala test cases using Playwright and records outputs in the Excel sheet.
 
-## Files
+## 1) Install prerequisites (one-time)
 
-- `test_automation.py` - Playwright runner that reads the test cases from Excel, executes the UI flow, and writes `Actual output` and `Status` values.
-- `Assignment 1 - Test cases.xlsx` - Source workbook with the 50 negative test cases, categorized by Singlish input type.
-- `requirements.txt` - Python dependencies.
+- Install Python 3.11 or 3.12.
+- Install Google Chrome (recommended), or let Playwright install Chromium.
 
-## Prerequisites
+## 2) Set up the project environment
 
-- Python 3.9 or newer
-- Microsoft Edge / Chromium browser support for Playwright
+1. Save the provided ZIP file to your D: drive.
+2. Extract it so your project path is D:\test_automation.
+3. Open Command Prompt.
+4. Navigate to the extracted folder:
 
-## Install
-
-```powershell
-py -3.9 -m pip install -r requirements.txt
-py -3.9 -m playwright install chromium
+```cmd
+cd /d D:\test_automation
 ```
 
-## Run the tests
+## 3) Install required dependencies (one-time)
 
-```powershell
-py -3.9 .\test_automation.py --headless
+From D:\test_automation, run:
+
+```cmd
+pip install -U pip
+pip install playwright openpyxl
+playwright install
 ```
 
-By default, the script reads the workbook in this folder, runs all rows in the sheet named ` Test cases`, and records the actual output plus a `PASS`, `FAIL`, or `UI Error` status.
+## 4) Run the automation
 
-## Test Coverage
+From D:\test_automation, run:
 
-The 50 negative test cases cover the following Singlish input types:
+```cmd
+python test_automation.py --excel "test_automation/ Assignment 1 - Test cases.xlsx" --url "https://www.pixelssuite.com/chat-translator" --wait-ms 5000 --type-delay-ms 80 --slow-mo-ms 200 --save-every 1 --keep-open
+```
 
-- Question forms
-- Requests
-- Inputs with punctuation marks
-- Romanization and spelling variants
-- Isolated English word insertions
-- Multi-word English phrases
-- English digital terms
-- Platform/app names
-- Time formats
-- Slang and casual phrasing
-- Extended messages with multiple sentences
-- Special characters and emojis
-- Mixed language code-switching
+## 5) Check results
 
-## Notes
+1. Go to the test_automation folder.
+2. Reopen the Excel file.
+3. Verify that values under Actual output and Status are correctly recorded.
 
-- All 50 test cases are marked as FAIL, indicating the system did not correctly convert these Singlish inputs to Sinhala (as expected for negative test cases).
-- The workbook includes detailed categorization of input types in the "Singlish input types covered" column.
-- Evidence and rationale for each categorization is provided in the "Evidence or rationale for the input type covered" column.
+## 6) Add additional columns to Excel
+
+After review, add these two columns next to Status:
+
+- Singlish input types covered
+- Evidence or rationale for the input type covered
+
+Manually fill both columns based on your assessment, using Appendix 2 template style.
+
+## Current repository state
+
+- Contains 50 negative test cases.
+- Status is set to FAIL for all 50 negative cases.
+- Includes the two additional columns with populated values.
